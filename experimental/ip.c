@@ -11,12 +11,12 @@
 #define PORT 35984
 #define UDP_HDR_SIZE 8
 
-struct udp_header {
+typedef struct {
     short src;
     short dst;
     short len;
     short csum;
-};
+} udp_header;
 
 // A simple test of raw sockets. Creates an IP payload of a UDP packet and
 // message and sends it.
@@ -27,7 +27,7 @@ struct udp_header {
 int main(int argc, char *argv[]) {
     // Make sure everything is the correct size.
     assert(sizeof(short) == 2);
-    assert(sizeof(struct udp_header) == UDP_HDR_SIZE);
+    assert(sizeof(udp_header) == UDP_HDR_SIZE);
 
     char* dstIP = getenv("DST_IP");
     if (dstIP == NULL) {
@@ -41,7 +41,7 @@ int main(int argc, char *argv[]) {
     int totalLength = UDP_HDR_SIZE + bodyLength;
 
     char buf[totalLength];
-    struct udp_header* header = (struct udp_header*) &buf;
+    udp_header* header = (udp_header*) &buf;
     header->src = htons(PORT - 2);
     header->dst = htons(PORT);
     header->len = htons(totalLength);
