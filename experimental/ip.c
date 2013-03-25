@@ -55,7 +55,10 @@ int main(int argc, char *argv[]) {
     struct sockaddr_in dstAddr;
     dstAddr.sin_family = AF_INET;
     dstAddr.sin_port = htons(PORT);
-    inet_pton(AF_INET, dstIP, &dstAddr.sin_addr);
+    if (inet_pton(AF_INET, dstIP, &dstAddr.sin_addr) != 1) {
+        printf("error parsing destination IP address: %s\n", dstIP);
+        return 1;
+    }
 
     if (sendto(sd, buf, totalLength, 0, (struct sockaddr*) &dstAddr, sizeof(dstAddr)) == -1) {
         perror("error sending");
