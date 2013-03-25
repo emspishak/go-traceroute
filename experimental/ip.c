@@ -62,6 +62,7 @@ int main(int argc, char *argv[]) {
 
     if (sendto(sd, buf, totalLength, 0, (struct sockaddr*) &dstAddr, sizeof(dstAddr)) == -1) {
         perror("error sending");
+        printf("Are you root?\n");
         return 1;
     }
 
