@@ -21,7 +21,7 @@ public class SimpleUDPServer {
         listen(socket);
 
         Scanner in = new Scanner(System.in);
-        System.out.print("Press enter to exit. ");
+        System.out.println("Press enter to exit.\n");
         in.nextLine();
 
         in.close();
@@ -49,6 +49,7 @@ public class SimpleUDPServer {
                     }
                     System.out.println("Packet received from " + packet.getSocketAddress() + ":");
                     System.out.println(new String(data, 0, packet.getLength()));
+                    System.out.println();
                     byte[] responseData = new byte[RESPONSE_HEADER.length() + packet.getLength()];
                     System.arraycopy(RESPONSE_HEADER_BYTES, 0, responseData, 0, RESPONSE_HEADER_BYTES.length);
                     System.arraycopy(data, 0, responseData, RESPONSE_HEADER_BYTES.length, packet.getLength());
