@@ -5,7 +5,7 @@ all: server
 
 server:	SimpleUDPServer.class
 
-SimpleUDPServer.class:
+SimpleUDPServer.class: SimpleUDPServer.java
 	$(JAVAC) SimpleUDPServer.java
 
 clean:
