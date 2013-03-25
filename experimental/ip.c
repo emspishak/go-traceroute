@@ -36,6 +36,9 @@ int main(int argc, char *argv[]) {
     header->src = htons(PORT - 2);
     header->dst = htons(PORT);
     header->len = htons(totalLength);
+    // The UDP checksum requires the source IP address, which isn't easy to get,
+    // so set it to zero, which causes it to be ignored.
+    header->csum = 0;
 
     char* msg = (char*) &buf[UDP_HDR_SIZE];
     strncpy(msg, body, bodyLength);
