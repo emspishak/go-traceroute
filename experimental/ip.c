@@ -27,8 +27,8 @@ typedef struct {
     unsigned dscp:6;
     unsigned len:16;
     unsigned id:16;
-    unsigned offset:13;
-    unsigned flags:3;
+    // Be careful when setting, bit order seems system dependent.
+    unsigned flags_offset:16;
     unsigned ttl:8;
     unsigned protocol:8;
     unsigned csum:16;
@@ -68,8 +68,7 @@ int main(int argc, char *argv[]) {
     ip->ecn = 0;
     ip->len = totalLength;
     ip->id = 0;
-    ip->flags = 2; // Don't fragment
-    ip->offset = 0;
+    ip->flags_offset = 0;
     ip->ttl = 64;
     ip->protocol = 17; // UDP
     ip->csum = 0; // Filled in by OS
