@@ -13,27 +13,27 @@
 #define UDP_HDR_SIZE 8
 
 typedef struct {
-    short src;
-    short dst;
-    short len;
-    short csum;
+    unsigned src:16;
+    unsigned dst:16;
+    unsigned len:16;
+    unsigned csum:16;
 } udp_header;
 
 // The order fields within a byte is swapped because the fields are big endian.
 typedef struct {
-    short ihl:4;
-    short version:4;
-    short ecn:2;
-    short dscp:6;
-    short len;
-    short id;
-    short offset:13;
-    short flags:3;
-    char ttl;
-    char protocol;
-    short csum;
-    int src;
-    int dst;
+    unsigned ihl:4;
+    unsigned version:4;
+    unsigned ecn:2;
+    unsigned dscp:6;
+    unsigned len:16;
+    unsigned id:16;
+    unsigned offset:13;
+    unsigned flags:3;
+    unsigned ttl:8;
+    unsigned protocol:8;
+    unsigned csum:16;
+    unsigned src:32;
+    unsigned dst:32;
 } ip_header;
 
 // A simple test of raw sockets. Creates an IP payload with an IP header, UDP
@@ -44,9 +44,6 @@ typedef struct {
 
 int main(int argc, char *argv[]) {
     // Make sure everything is the correct size.
-    assert(sizeof(char) == 1);
-    assert(sizeof(short) == 2);
-    assert(sizeof(int) == 4);
     assert(sizeof(udp_header) == UDP_HDR_SIZE);
     assert(sizeof(ip_header) == IP_HDR_SIZE);
 
