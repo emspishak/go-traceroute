@@ -39,7 +39,7 @@ public class SimpleUDPServer {
                     try {
                         socket.receive(packet);
                     } catch (IOException e) {
-                        if (e instanceof SocketException && SOCKET_CLOSED.equals(e.getMessage())) {
+                        if (e instanceof SocketException && SOCKET_CLOSED.equalsIgnoreCase(e.getMessage())) {
                             // Normal, socket was closed.
                             return;
                         }
