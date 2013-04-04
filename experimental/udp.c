@@ -20,6 +20,8 @@ int main(int argc, char* argv[]) {
     }
 
     int sd = socket(PF_INET, SOCK_DGRAM, IPPROTO_UDP);
+    int ttl = 64;
+    setsockopt(sd, IPPROTO_IP, IP_TTL, &ttl, sizeof(ttl));
 
     struct sockaddr_in srcAddr;
     srcAddr.sin_family = AF_INET;
