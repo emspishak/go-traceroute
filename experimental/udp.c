@@ -19,7 +19,7 @@ int main(int argc, char* argv[]) {
         dstIP = DEFAULT_DST_IP;
     }
 
-    int sd = socket(PF_INET, SOCK_DGRAM, IPPROTO_UDP);
+    int sd = socket(PF_INET, SOCK_DGRAM, 0);
     int ttl = 64;
     setsockopt(sd, IPPROTO_IP, IP_TTL, &ttl, sizeof(ttl));
 
